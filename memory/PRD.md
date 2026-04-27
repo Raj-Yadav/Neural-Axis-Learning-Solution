@@ -23,13 +23,17 @@ B2B-focused website for Neural Axis, an advanced tech education institute target
 - Google Calendar booking integration (ready when credentials provided)
 
 ## What's Been Implemented (April 27, 2026)
-- Full marketing website with all 5 sections + footer
-- Contact form with Name, Role (Select), Institution, Email, Phone, Date (Calendar), Message
-- Backend CRUD API for leads (create, list, stats, update, delete, filter)
-- JWT-based admin authentication with cookie-based sessions
-- Admin dashboard with lead table, stats cards, status filters, detail dialog, notes
-- Admin seeding on startup
-- Email notification stub (Resend integration ready, needs API key)
+- Full marketing website with all 5 original sections + 3 new sections from trainer profile
+- Hero with social proof strip (IBM, TCS, Wipro, Capgemini, NASSCOM)
+- Expanded Core Technologies: 8 cards (Python, ML, DL, GenAI/LLMs, Agentic AI, RAG/VectorDBs, NLP/CV, MLOps)
+- Partnership Models: FDP, Bootcamps, Curriculum Integration
+- NEW: Project Portfolio - 6 real AI projects (RAG Chatbot, Agentic Chat, Resume Screening, Sentiment Analysis, Image Classification, Interview Prep)
+- Track Record with real certifications (Microsoft, Columbia, deeplearning.ai), 7 recent training deliveries table
+- NEW: Expert Profile - Raj Yadav bio, professional journey (4 companies)
+- Contact form with Calendar date picker, role Select dropdown
+- Footer with real contact info (email, phone, location)
+- Backend CRUD for leads, JWT admin auth, admin dashboard with stats/filters/detail dialog
+- Admin credentials: admin@neuralaxis.com / NeuralAxis@2024
 
 ## Prioritized Backlog
 ### P0 (Critical - Done)

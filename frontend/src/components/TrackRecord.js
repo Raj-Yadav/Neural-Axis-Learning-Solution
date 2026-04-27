@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
-import { Award, ExternalLink } from "lucide-react";
+import { Target, Handshake, ShieldCheck, Lightbulb } from "lucide-react";
 
 const partners = [
   "IBM", "TCS", "Wipro", "Capgemini", "NASSCOM", "Synergistic Compusoft",
@@ -8,17 +8,33 @@ const partners = [
 ];
 
 const stats = [
-  { value: "8+", label: "Years of Experience" },
+  { value: "12+", label: "Years of Experience" },
   { value: "50+", label: "Institutions Trained" },
   { value: "10K+", label: "Students Impacted" },
   { value: "200+", label: "FDPs & Workshops" },
 ];
 
-const certifications = [
-  { title: "Programming with Python for Data Science", org: "Microsoft (edX)" },
-  { title: "Machine Learning for Data Science & Analytics", org: "Columbia University (edX)" },
-  { title: "Deep Learning Specialization", org: "deeplearning.ai" },
-  { title: "ChatGPT Prompt Engineering for Developers", org: "deeplearning.ai" },
+const pillars = [
+  {
+    icon: Target,
+    title: "Industry-First Curriculum",
+    desc: "Every module is reverse-engineered from actual job descriptions and enterprise workflows — not textbook theory. Our content mirrors what companies like IBM and TCS expect on day one.",
+  },
+  {
+    icon: Handshake,
+    title: "Corporate & Government Trust",
+    desc: "From delivering AI programs for IBM and Wipro to government-backed faculty training through NASSCOM — our credibility is built on results, not promises.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Accreditation-Ready Design",
+    desc: "Programs are structured to meet NAAC, NBA, and AICTE outcome-based education frameworks — helping institutions score higher on quality assessments.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Practitioner-Led Training",
+    desc: "Our trainers are not just educators — they are ML engineers, AI architects, and data scientists with real deployment experience across production systems.",
+  },
 ];
 
 const recentTrainings = [
@@ -43,11 +59,16 @@ export default function TrackRecord() {
           className="mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">
-            Proven Track Record
+            About Neural Axis
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text">
-            Trusted by Industry &<br />Academia Alike
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text mb-4">
+            12+ Years of Bridging<br />Industry & Academia
           </h2>
+          <p className="text-base leading-relaxed text-na-text-sec max-w-3xl">
+            Neural Axis was founded on a single observation: universities teach AI theory, 
+            but the industry demands deployment-ready engineers. We exist to close that gap 
+            &mdash; at scale, across institutions.
+          </p>
         </motion.div>
 
         {/* Stats Grid */}
@@ -56,7 +77,7 @@ export default function TrackRecord() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-20"
         >
           {stats.map((stat) => (
             <div
@@ -72,30 +93,52 @@ export default function TrackRecord() {
           ))}
         </motion.div>
 
+        {/* Why Neural Axis — 4 Pillars */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-20"
+        >
+          <h3 className="font-heading text-xl sm:text-2xl font-medium text-na-text mb-8">
+            Why Institutions Choose Us
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {pillars.map((pillar) => (
+              <div
+                key={pillar.title}
+                className="p-7 rounded-xl border border-[rgba(15,23,42,0.08)] bg-white hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300"
+                data-testid={`pillar-${pillar.title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                <pillar.icon className="w-7 h-7 text-na-navy mb-4" />
+                <h4 className="font-heading text-lg font-medium text-na-text mb-2">{pillar.title}</h4>
+                <p className="text-sm leading-relaxed text-na-text-sec">{pillar.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Content + Image */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid lg:grid-cols-2 gap-12 items-center mb-16"
+          className="grid lg:grid-cols-2 gap-12 items-center mb-20"
         >
           <div>
             <p className="text-base leading-relaxed text-na-text-sec mb-6">
-              With over <strong className="text-na-text font-medium">8 years of specialized industry experience</strong>, 
-              Neural Axis has delivered advanced AI training programs for corporate leaders 
-              like <strong className="text-na-text font-medium">IBM, TCS, Wipro, and Capgemini</strong>, as well 
-              as government initiatives through <strong className="text-na-text font-medium">NASSCOM</strong>.
-            </p>
-            <p className="text-base leading-relaxed text-na-text-sec mb-6">
-              Our programs are designed by practitioners who have worked as <strong className="text-na-text font-medium">Machine Learning Engineers</strong> and 
-              <strong className="text-na-text font-medium"> AI Architects</strong> &mdash; we build production-grade skills backed by real-world 
-              project experience in RAG systems, LLM fine-tuning, and agentic AI workflows.
+              Over the past <strong className="text-na-text font-medium">12 years</strong>, Neural Axis 
+              has become a trusted training delivery partner for corporate giants 
+              like <strong className="text-na-text font-medium">IBM, TCS, Wipro, and Capgemini</strong>, 
+              as well as government-backed faculty programs through <strong className="text-na-text font-medium">NASSCOM</strong>.
             </p>
             <p className="text-base leading-relaxed text-na-text-sec">
-              Led by <strong className="text-na-text font-medium">Raj Yadav</strong>, a Data Science & AI expert with 
-              certifications from <strong className="text-na-text font-medium">Microsoft, Columbia University, and deeplearning.ai</strong>, 
-              our training ensures your institution stays ahead of the AI curve.
+              Our team comprises ML engineers, AI architects, and data scientists with 
+              real deployment experience — people who've built production RAG systems, 
+              fine-tuned LLMs, and shipped agentic AI workflows. That real-world DNA is 
+              embedded in every program we design for your institution.
             </p>
           </div>
           <div className="rounded-xl overflow-hidden border border-[rgba(15,23,42,0.08)]">
@@ -108,41 +151,15 @@ export default function TrackRecord() {
           </div>
         </motion.div>
 
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-16"
-        >
-          <h3 className="font-heading text-xl font-medium text-na-text mb-6">Credentials & Certifications</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {certifications.map((cert) => (
-              <div
-                key={cert.title}
-                className="p-5 rounded-xl border border-[rgba(15,23,42,0.08)] bg-white flex gap-3"
-                data-testid={`cert-${cert.org.toLowerCase().replace(/[^a-z]/g, "-")}`}
-              >
-                <Award className="w-5 h-5 text-na-mint flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-na-text leading-snug">{cert.title}</p>
-                  <p className="text-xs text-na-text-sec mt-1">{cert.org}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Recent Training Deliveries */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           className="mb-16"
         >
-          <h3 className="font-heading text-xl font-medium text-na-text mb-6">Recent Training Deliveries</h3>
+          <h3 className="font-heading text-xl sm:text-2xl font-medium text-na-text mb-6">Recent Training Deliveries</h3>
           <div className="rounded-xl border border-[rgba(15,23,42,0.08)] bg-white overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm" data-testid="trainings-table">

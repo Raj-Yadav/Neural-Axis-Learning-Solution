@@ -20,6 +20,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Technologies", id: "technologies" },
     { label: "Solutions", id: "solutions" },
+    { label: "Projects", id: "projects" },
     { label: "About", id: "about" },
     { label: "Contact", id: "contact" },
   ];

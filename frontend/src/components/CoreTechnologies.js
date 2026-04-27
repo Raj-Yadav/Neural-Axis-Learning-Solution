@@ -1,48 +1,61 @@
 import { motion } from "framer-motion";
-import { Code2, Brain, Layers, Sparkles, Workflow } from "lucide-react";
+import { Code2, Brain, Layers, Sparkles, Workflow, Database, MessageSquare, Container } from "lucide-react";
 
 const technologies = [
   {
     icon: Code2,
     title: "Python",
-    desc: "Industry-standard programming for data science and AI applications",
+    desc: "Industry-standard programming with Scikit-Learn, Pandas, NumPy for data science and AI applications",
     color: "bg-na-mint-bg",
-    span: "md:col-span-1",
   },
   {
     icon: Brain,
     title: "Machine Learning",
-    desc: "Supervised, unsupervised, and reinforcement learning with scikit-learn and XGBoost",
+    desc: "Supervised, unsupervised & reinforcement learning. Feature engineering, model evaluation, and XGBoost",
     color: "bg-na-blue-bg",
-    span: "md:col-span-1",
   },
   {
     icon: Layers,
     title: "Deep Learning",
-    desc: "Neural networks, CNNs, RNNs, and Transformers using PyTorch and TensorFlow",
+    desc: "Neural networks, CNNs, RNNs, and Transformers using PyTorch, TensorFlow & Keras",
     color: "bg-na-sand",
-    span: "md:col-span-1",
   },
   {
     icon: Sparkles,
-    title: "Generative AI",
-    desc: "Large Language Models, prompt engineering, RAG systems, and fine-tuning techniques",
+    title: "Generative AI & LLMs",
+    desc: "OpenAI models, HuggingFace, LLM fine-tuning, prompt engineering, and RAG architecture",
     color: "bg-na-mint-bg",
-    span: "md:col-span-1",
   },
   {
     icon: Workflow,
     title: "Agentic AI Workflows",
-    desc: "Building autonomous AI agents with LangChain, LangGraph, and CrewAI for production-ready applications",
+    desc: "Building autonomous AI agents with LangChain, LangGraph, LlamaIndex, and CrewAI for production-ready applications",
     color: "bg-white",
-    span: "md:col-span-2",
     featured: true,
+  },
+  {
+    icon: Database,
+    title: "RAG & Vector Databases",
+    desc: "ChromaDB, vector embeddings, document ingestion pipelines, and enterprise-ready retrieval-augmented generation",
+    color: "bg-na-blue-bg",
+  },
+  {
+    icon: MessageSquare,
+    title: "NLP & Computer Vision",
+    desc: "Text classification, NER, sentiment analysis, text embeddings, image classification with CNNs",
+    color: "bg-na-sand",
+  },
+  {
+    icon: Container,
+    title: "MLOps & Deployment",
+    desc: "MLFlow, FEAST, Docker, GitHub Actions, FastAPI & Django for production AI model deployment",
+    color: "bg-na-mint-bg",
   },
 ];
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const itemVariants = {
@@ -64,9 +77,13 @@ export default function CoreTechnologies() {
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">
             Core Technologies
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text">
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text mb-4">
             Highly Specialized<br />Tech Stack
           </h2>
+          <p className="text-base leading-relaxed text-na-text-sec max-w-2xl">
+            From foundational Python to cutting-edge Agentic AI &mdash; our curriculum covers the full spectrum 
+            of technologies demanded by the modern AI industry.
+          </p>
         </motion.div>
 
         <motion.div
@@ -74,26 +91,24 @@ export default function CoreTechnologies() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {technologies.map((tech) => (
             <motion.div
               key={tech.title}
               variants={itemVariants}
-              className={`${tech.span} ${
-                tech.featured ? "lg:col-span-2" : ""
-              } group relative p-8 rounded-xl border border-[rgba(15,23,42,0.08)] ${tech.color} hover:-translate-y-1 hover:shadow-sm transition-all duration-300 cursor-default`}
+              className={`${tech.featured ? "sm:col-span-2" : ""} group relative p-8 rounded-xl border border-[rgba(15,23,42,0.08)] ${tech.color} hover:-translate-y-1 hover:shadow-sm transition-all duration-300 cursor-default`}
               data-testid={`tech-card-${tech.title.toLowerCase().replace(/\s+/g, "-")}`}
             >
               {tech.featured && (
                 <img
                   src="https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/e6e1b7f24d7b124d34ed52d5fc27f3a94d22889c2693a628d280c3427be0ac4a.png"
                   alt="Data workflow"
-                  className="absolute top-4 right-4 w-24 h-24 opacity-20 group-hover:opacity-30 transition-opacity"
+                  className="absolute top-4 right-4 w-24 h-24 opacity-15 group-hover:opacity-25 transition-opacity"
                 />
               )}
-              <tech.icon className="w-8 h-8 text-na-navy mb-4" />
-              <h3 className="font-heading text-xl font-medium text-na-text mb-2">{tech.title}</h3>
+              <tech.icon className="w-7 h-7 text-na-navy mb-4" />
+              <h3 className="font-heading text-lg font-medium text-na-text mb-2">{tech.title}</h3>
               <p className="text-sm leading-relaxed text-na-text-sec">{tech.desc}</p>
             </motion.div>
           ))}

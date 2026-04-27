@@ -52,6 +52,20 @@ export default function HeroSection() {
                 Book a Free Workshop
               </Button>
             </div>
+
+            {/* Social Proof Strip */}
+            <div className="mt-12 pt-8 border-t border-[rgba(15,23,42,0.06)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-na-text-sec/60 mb-4">
+                Trusted by leading organizations
+              </p>
+              <div className="flex flex-wrap items-center gap-6">
+                {["IBM", "TCS", "Wipro", "Capgemini", "NASSCOM"].map((name) => (
+                  <span key={name} className="text-sm font-heading font-medium text-na-text-sec/50 tracking-tight" data-testid={`hero-client-${name.toLowerCase()}`}>
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* Right Visual */}

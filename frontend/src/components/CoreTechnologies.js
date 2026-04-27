@@ -33,6 +33,12 @@ const technologies = [
     color: "bg-white",
   },
   {
+    icon: Container,
+    title: "MLOps & Deployment",
+    desc: "MLFlow, FEAST, Docker, GitHub Actions, FastAPI & Django for production AI model deployment",
+    color: "bg-na-mint-bg",
+  },
+  {
     icon: Database,
     title: "RAG & Vector Databases",
     desc: "ChromaDB, vector embeddings, document ingestion pipelines, and enterprise-ready retrieval-augmented generation",
@@ -43,12 +49,6 @@ const technologies = [
     title: "NLP & Computer Vision",
     desc: "Text classification, NER, sentiment analysis, text embeddings, image classification with CNNs",
     color: "bg-na-sand",
-  },
-  {
-    icon: Container,
-    title: "MLOps & Deployment",
-    desc: "MLFlow, FEAST, Docker, GitHub Actions, FastAPI & Django for production AI model deployment",
-    color: "bg-na-mint-bg",
   },
 ];
 

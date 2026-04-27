@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/dashboard
 
-Sitemap: https://neuralaxis.in/sitemap.xml
+Sitemap: https://neuralaxis.co.in/sitemap.xml

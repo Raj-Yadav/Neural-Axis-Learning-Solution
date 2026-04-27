@@ -3,9 +3,12 @@ import HeroSection from "@/components/HeroSection";
 import CoreTechnologies from "@/components/CoreTechnologies";
 import PartnershipModels from "@/components/PartnershipModels";
 import ProjectPortfolio from "@/components/ProjectPortfolio";
+import Testimonials from "@/components/Testimonials";
 import TrackRecord from "@/components/TrackRecord";
+import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function HomePage() {
   return (
@@ -15,9 +18,12 @@ export default function HomePage() {
       <CoreTechnologies />
       <PartnershipModels />
       <ProjectPortfolio />
+      <Testimonials />
       <TrackRecord />
+      <FAQ />
       <ContactForm />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

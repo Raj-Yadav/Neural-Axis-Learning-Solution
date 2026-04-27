@@ -1,6 +1,33 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { Target, Handshake, ShieldCheck, Lightbulb } from "lucide-react";
+
+function AnimatedCounter({ target, suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const end = parseInt(target);
+    const duration = 1500;
+    const step = Math.max(1, Math.floor(end / (duration / 16)));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 const partners = [
   "IBM", "TCS", "Wipro", "Capgemini", "NASSCOM", "Synergistic Compusoft",
@@ -8,10 +35,10 @@ const partners = [
 ];
 
 const stats = [
-  { value: "12+", label: "Years of Experience" },
-  { value: "50+", label: "Institutions Trained" },
-  { value: "10K+", label: "Students Impacted" },
-  { value: "200+", label: "FDPs & Workshops" },
+  { value: "12", suffix: "+", label: "Years of Experience" },
+  { value: "50", suffix: "+", label: "Institutions Trained" },
+  { value: "10", suffix: "K+", label: "Students Impacted" },
+  { value: "200", suffix: "+", label: "FDPs & Workshops" },
 ];
 
 const pillars = [
@@ -86,7 +113,7 @@ export default function TrackRecord() {
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
             >
               <p className="font-heading text-4xl sm:text-5xl font-medium tracking-tighter text-na-navy mb-1">
-                {stat.value}
+                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </p>
               <p className="text-sm text-na-text-sec">{stat.label}</p>
             </div>

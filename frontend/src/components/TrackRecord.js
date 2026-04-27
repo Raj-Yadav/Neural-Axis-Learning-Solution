@@ -171,7 +171,8 @@ export default function TrackRecord() {
           <div className="rounded-xl overflow-hidden border border-[rgba(15,23,42,0.08)]">
             <img
               src="https://images.unsplash.com/photo-1775933802859-27889463db79?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwY2FtcHVzJTIwZ2xhc3MlMjBidWlsZGluZ3xlbnwwfHx8fDE3NzcyNzUxOTN8MA&ixlib=rb-4.1.0&q=85"
-              alt="Modern university campus"
+              alt="Modern university campus with glass architecture representing institutional excellence in AI education"
+              loading="lazy"
               className="w-full h-64 lg:h-80 object-cover"
               data-testid="campus-image"
             />

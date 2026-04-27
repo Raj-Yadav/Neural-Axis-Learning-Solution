@@ -10,6 +10,7 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-[90vh] flex items-center overflow-hidden gradient-spot-mint gradient-spot-blue"
       data-testid="hero-section"
+      aria-label="Hero - Neural Axis AI Training for Universities"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -86,7 +87,8 @@ export default function HeroSection() {
               <div className="relative bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-8 shadow-lg">
                 <img
                   src="https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/3141701577f08b896de2f9cfffbc7bfc985a7f3fcb6f78c24ffe4243babdd145.png"
-                  alt="Abstract AI visualization"
+                  alt="Abstract AI visualization representing neural networks and data flow"
+                  loading="lazy"
                   className="w-full h-auto rounded-xl"
                   data-testid="hero-image"
                 />

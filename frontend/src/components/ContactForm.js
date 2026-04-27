@@ -74,7 +74,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-white relative gradient-spot-sand" data-testid="contact-section">
+    <section id="contact" className="py-24 lg:py-32 bg-white relative gradient-spot-sand" data-testid="contact-section" aria-label="Schedule a consultation with Neural Axis">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Left Context */}

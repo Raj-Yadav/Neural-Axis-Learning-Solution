@@ -31,7 +31,6 @@ const technologies = [
     title: "Agentic AI Workflows",
     desc: "Building autonomous AI agents with LangChain, LangGraph, LlamaIndex, and CrewAI for production-ready applications",
     color: "bg-white",
-    featured: true,
   },
   {
     icon: Database,
@@ -97,16 +96,9 @@ export default function CoreTechnologies() {
             <motion.div
               key={tech.title}
               variants={itemVariants}
-              className={`${tech.featured ? "sm:col-span-2" : ""} group relative p-8 rounded-xl border border-[rgba(15,23,42,0.08)] ${tech.color} hover:-translate-y-1 hover:shadow-sm transition-all duration-300 cursor-default`}
+              className={`group relative p-8 rounded-xl border border-[rgba(15,23,42,0.08)] ${tech.color} hover:-translate-y-1 hover:shadow-sm transition-all duration-300 cursor-default`}
               data-testid={`tech-card-${tech.title.toLowerCase().replace(/\s+/g, "-")}`}
             >
-              {tech.featured && (
-                <img
-                  src="https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/e6e1b7f24d7b124d34ed52d5fc27f3a94d22889c2693a628d280c3427be0ac4a.png"
-                  alt="Data workflow"
-                  className="absolute top-4 right-4 w-24 h-24 opacity-15 group-hover:opacity-25 transition-opacity"
-                />
-              )}
               <tech.icon className="w-7 h-7 text-na-navy mb-4" />
               <h3 className="font-heading text-lg font-medium text-na-text mb-2">{tech.title}</h3>
               <p className="text-sm leading-relaxed text-na-text-sec">{tech.desc}</p>

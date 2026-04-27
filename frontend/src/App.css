@@ -1,34 +1,55 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.gradient-spot-mint {
+  position: relative;
+}
+.gradient-spot-mint::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 45%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(165, 223, 178, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.gradient-spot-blue::after {
+  content: "";
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 40%;
+  height: 55%;
+  background: radial-gradient(circle, rgba(138, 180, 248, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.gradient-spot-sand {
+  position: relative;
+}
+.gradient-spot-sand::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 35%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(253, 251, 247, 0.8) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
-
-.App-link {
-    color: #61dafb;
+::-webkit-scrollbar-track {
+  background: #FAFAFA;
 }
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+::-webkit-scrollbar-thumb {
+  background: #A5DFB2;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8AB4F8;
 }

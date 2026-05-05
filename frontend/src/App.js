@@ -4,6 +4,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import HomePage from "@/pages/HomePage";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
+import CourseLandingPage from "@/pages/CourseLandingPage";
 import "@/App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Toaster position="top-right" richColors theme="light" />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/courses/generative-ai" element={<CourseLandingPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>

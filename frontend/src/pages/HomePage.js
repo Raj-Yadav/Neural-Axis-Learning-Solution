@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import CoreTechnologies from "@/components/CoreTechnologies";
 import PartnershipModels from "@/components/PartnershipModels";
 import ProjectPortfolio from "@/components/ProjectPortfolio";
+import PastCourses from "@/components/PastCourses";
 import Testimonials from "@/components/Testimonials";
 import TrackRecord from "@/components/TrackRecord";
 import FAQ from "@/components/FAQ";
@@ -18,6 +19,7 @@ export default function HomePage() {
       <CoreTechnologies />
       <PartnershipModels />
       <ProjectPortfolio />
+      <PastCourses />
       <Testimonials />
       <TrackRecord />
       <FAQ />

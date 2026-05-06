@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Zap, Phone, ArrowRight } from "lucide-react";
+import { Zap, Phone, ArrowRight, CheckCircle2, Video, BookOpen, Users, Award, HeadphonesIcon, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const phases = [
@@ -229,6 +229,14 @@ export default function AgenticAICoursePage() {
             <Button onClick={scrollToEnroll} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-6 text-sm font-medium" data-testid="agentic-hero-cta">
               Enroll Now <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
+            {/* Urgency */}
+            <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-100" data-testid="urgency-badge">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+              </span>
+              <span className="text-sm font-medium text-red-700">Next Cohort: July 2026 — Only 15 seats remaining</span>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -243,10 +251,110 @@ export default function AgenticAICoursePage() {
 
       {/* Phases */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 space-y-10">
-        {phases.map((phase) => (
-          <PhaseCard key={phase.id} phase={phase} />
+        {phases.map((phase, idx) => (
+          <div key={phase.id}>
+            <PhaseCard phase={phase} />
+            {/* Mid-page CTA after Phase 2 */}
+            {idx === 1 && (
+              <div className="mt-10 text-center py-10 rounded-2xl bg-na-mint-bg/40 border border-na-mint/20">
+                <p className="text-base text-na-text-sec mb-4">Ready to build production AI agents?</p>
+                <Button onClick={scrollToEnroll} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-5 text-sm font-medium" data-testid="mid-cta">
+                  Reserve Your Seat <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+                <p className="text-xs text-na-text-sec/60 mt-3">Only 15 seats per cohort</p>
+              </div>
+            )}
+          </div>
         ))}
       </div>
+
+      {/* Is This For You? */}
+      <section className="py-20 lg:py-24 bg-white" data-testid="is-this-for-you">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">Is This For You?</span>
+              <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text mb-6">
+                This bootcamp is built for you if...
+              </h2>
+              <p className="text-base text-na-text-sec">
+                Whether you're a university looking to upskill students, or a professional ready to transition into AI engineering — this program meets you where you are.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-4"
+            >
+              {[
+                "Your graduates struggle to get placed in AI/ML roles because they lack hands-on project experience",
+                "Your institution wants to offer an industry-grade AI program but doesn't have in-house expertise",
+                "Your faculty needs upskilling in Generative AI, RAG, and Agentic workflows",
+                "You want students building and deploying real AI systems — not just reading theory",
+                "You need a program that aligns with NAAC/NBA outcome-based education frameworks",
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-na-mint-bg/40 border border-na-mint/20"
+                  data-testid={`for-you-${i}`}
+                >
+                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-na-text leading-relaxed">{item}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* What You'll Get */}
+      <section className="py-20 lg:py-24 bg-[#FAFAFA]" data-testid="what-youll-get">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-14">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">What's Included</span>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text">
+              What You'll Get
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: Video, title: "Live & Interactive Sessions", desc: "6 hours/day of hands-on, instructor-led training. Ask questions, get real-time feedback, and code along." },
+              { icon: BookOpen, title: "Complete Course Material", desc: "Slides, code repositories, project templates, and reference documentation — yours to keep forever." },
+              { icon: Users, title: "Peer Learning Community", desc: "Join a cohort of motivated learners. Collaborate on projects, share insights, and build your network." },
+              { icon: Award, title: "Certificate of Completion", desc: "Industry-recognized certificate showcasing your Agentic AI engineering skills. LinkedIn-ready." },
+              { icon: HeadphonesIcon, title: "30-Day Post-Training Support", desc: "Doubt resolution, project guidance, and career advice for 30 days after the bootcamp ends." },
+              { icon: Clock, title: "Lifetime Access to Recordings", desc: "Missed a session? All live classes are recorded. Revisit any module anytime, at your own pace." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="p-7 rounded-xl bg-white border border-[rgba(15,23,42,0.08)] hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300"
+                data-testid={`get-card-${i}`}
+              >
+                <div className="w-10 h-10 rounded-lg bg-na-mint-bg flex items-center justify-center mb-4">
+                  <item.icon className="w-5 h-5 text-na-navy" />
+                </div>
+                <h3 className="font-heading text-base font-medium text-na-text mb-2">{item.title}</h3>
+                <p className="text-sm text-na-text-sec leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA after What You'll Get */}
+          <div className="text-center mt-14">
+            <Button onClick={scrollToEnroll} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-6 text-sm font-medium" data-testid="get-section-cta">
+              Enroll Now — Limited Seats <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* Enrollment CTA */}
       <section id="enroll" className="py-20 lg:py-24 bg-na-navy text-white" data-testid="agentic-enroll-section">
@@ -256,9 +364,17 @@ export default function AgenticAICoursePage() {
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium mb-4">
               Ready to Become an Agentic AI Engineer?
             </h2>
-            <p className="text-base text-white/60 mb-8 max-w-xl mx-auto">
+            <p className="text-base text-white/60 mb-4 max-w-xl mx-auto">
               28 days from zero to deploying production AI agents on AWS. Limited seats per cohort.
             </p>
+            {/* Urgency */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-400"></span>
+              </span>
+              <span className="text-sm font-medium text-white/90">Next Cohort: July 2026 — Only 15 seats remaining</span>
+            </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="https://wa.me/919265802045?text=Hi%20Neural%20Axis%2C%20I%27m%20interested%20in%20the%2028-Day%20Agentic%20AI%20Engineer%20Bootcamp.%20Please%20share%20enrollment%20details." target="_blank" rel="noopener noreferrer">
                 <Button className="bg-[#25D366] hover:bg-[#25D366]/90 text-white rounded-full px-8 py-6 text-sm font-medium" data-testid="agentic-enroll-whatsapp">

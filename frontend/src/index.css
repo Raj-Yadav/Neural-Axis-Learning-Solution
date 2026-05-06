@@ -7,6 +7,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -14,6 +16,21 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* GPU-accelerated smooth scrolling */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+section, div, img {
+  will-change: auto;
+}
+
+/* Optimize images */
+img {
+  content-visibility: auto;
 }
 
 @layer base {
@@ -30,7 +47,7 @@ body {
     --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
-    --accent: 140 40% 95%;
+    --accent: 152 50% 88%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;

@@ -61,7 +61,7 @@ export default function HeroSection() {
               </p>
               <div className="flex flex-wrap items-center gap-6">
                 {["IBM", "TCS", "Wipro", "Capgemini", "NASSCOM"].map((name) => (
-                  <span key={name} className="text-sm font-heading font-medium text-na-text-sec/50 tracking-tight" data-testid={`hero-client-${name.toLowerCase()}`}>
+                  <span key={name} className="text-sm font-heading font-medium text-na-text/30 tracking-tight" data-testid={`hero-client-${name.toLowerCase()}`}>
                     {name}
                   </span>
                 ))}

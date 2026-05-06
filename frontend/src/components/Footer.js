@@ -9,12 +9,12 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <Zap className="w-5 h-5 text-na-mint" />
-              <span className="font-heading font-bold text-lg tracking-tight">Neural Axis</span>
+              <span className="font-heading font-bold text-lg tracking-tight">Neural Axis Learning Solution</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-md">
               Industry Integration Partner for Advanced AI & Data Science. 
               Empowering universities with cutting-edge curriculum, faculty development, 
-              and student bootcamps since 2018.
+              and student bootcamps since 2012.
             </p>
           </div>
 

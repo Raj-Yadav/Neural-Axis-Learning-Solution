@@ -30,7 +30,7 @@ const pastCourses = [
     title: "Big Data & Data Warehouse FDP",
     date: "February 2026",
     audience: "NASSCOM Faculty",
-    image: "https://images.unsplash.com/photo-1719159381916-062fa9f435a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxjb3Jwb3JhdGUlMjB0cmFpbmluZyUyMHNlbWluYXIlMjBjbGFzc3Jvb20lMjBJbmRpYXxlbnwwfHx8fDE3Nzc5NjgzMzV8MA&ixlib=rb-4.1.0&q=85",
+    image: "https://images.unsplash.com/photo-1664382953518-4a664ab8a8c9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxwcm9mZXNzb3IlMjB0ZWFjaGluZyUyMGZhY3VsdHklMjBsZWN0dXJlJTIwd2hpdGVib2FyZCUyMGNsYXNzcm9vbXxlbnwwfHx8fDE3NzgwNjAyMDV8MA&ixlib=rb-4.1.0&q=85",
   },
   {
     title: "AI for Interview Readiness",

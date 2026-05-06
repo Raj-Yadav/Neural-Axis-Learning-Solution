@@ -68,7 +68,7 @@ export default function Navbar() {
           >
             <Zap className="w-5 h-5 text-na-navy" />
             <span className="font-heading font-bold text-lg tracking-tight text-na-text">
-              Neural Axis
+              Neural Axis <span className="font-normal text-na-text-sec text-xs hidden lg:inline">Learning Solution</span>
             </span>
           </div>
 

@@ -49,7 +49,7 @@ export default function AdminLogin() {
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center gap-2 mb-8">
           <Zap className="w-6 h-6 text-na-navy" />
-          <span className="font-heading font-bold text-xl tracking-tight text-na-text">Neural Axis</span>
+          <span className="font-heading font-bold text-xl tracking-tight text-na-text">Neural Axis Learning Solution</span>
         </div>
 
         <Card className="border border-[rgba(15,23,42,0.08)] shadow-sm">
@@ -102,7 +102,7 @@ export default function AdminLogin() {
 
         <p className="text-center text-xs text-na-text-sec mt-6">
           <a href="/" className="hover:text-na-text transition-colors" data-testid="back-to-site">
-            Back to Neural Axis
+            Back to Neural Axis Learning Solution
           </a>
         </p>
       </div>

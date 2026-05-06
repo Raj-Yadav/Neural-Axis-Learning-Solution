@@ -207,7 +207,7 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Zap className="w-5 h-5 text-na-navy" />
-            <span className="font-heading font-bold text-lg tracking-tight text-na-text">Neural Axis</span>
+            <span className="font-heading font-bold text-lg tracking-tight text-na-text">Neural Axis Learning Solution</span>
             <span className="text-xs text-na-text-sec ml-2 hidden sm:inline">Dashboard</span>
           </div>
           <div className="flex items-center gap-4">

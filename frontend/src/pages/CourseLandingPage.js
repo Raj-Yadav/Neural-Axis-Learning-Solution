@@ -45,7 +45,7 @@ export default function CourseLandingPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2" data-testid="course-nav-logo">
             <Zap className="w-5 h-5 text-na-navy" />
-            <span className="font-heading font-bold text-lg tracking-tight text-na-text">Neural Axis</span>
+            <span className="font-heading font-bold text-lg tracking-tight text-na-text">Neural Axis Learning Solution</span>
           </Link>
           <div className="flex items-center gap-4">
             <a href="tel:+919265802045" className="hidden sm:flex items-center gap-1.5 text-sm text-na-text-sec hover:text-na-text">
@@ -216,7 +216,7 @@ export default function CourseLandingPage() {
       {/* Footer */}
       <footer className="py-8 bg-na-navy border-t border-white/10 text-center">
         <Link to="/" className="text-sm text-white/40 hover:text-white/60 transition-colors" data-testid="course-back-home">
-          ← Back to Neural Axis Homepage
+          ← Back to Homepage
         </Link>
       </footer>
     </div>

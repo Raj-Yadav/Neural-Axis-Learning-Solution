@@ -8,8 +8,10 @@ import Testimonials from "@/components/Testimonials";
 import TrackRecord from "@/components/TrackRecord";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
+import BookingSection from "@/components/BookingSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { BootcampBannerInline, BootcampBannerCompact } from "@/components/BootcampBanner";
 
 export default function HomePage() {
   return (
@@ -17,12 +19,19 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <CoreTechnologies />
+      {/* Bootcamp Banner - after Technologies */}
+      <BootcampBannerInline />
       <PartnershipModels />
       <ProjectPortfolio />
+      {/* Bootcamp Banner Compact - after Projects */}
+      <BootcampBannerCompact />
       <PastCourses />
       <Testimonials />
       <TrackRecord />
+      {/* Bootcamp Banner - after Track Record */}
+      <BootcampBannerInline />
       <FAQ />
+      <BookingSection />
       <ContactForm />
       <Footer />
       <WhatsAppButton />

@@ -67,9 +67,10 @@ export default function Navbar() {
             data-testid="navbar-logo"
           >
             <Zap className="w-5 h-5 text-na-navy" />
-            <span className="font-heading font-bold text-lg tracking-tight text-na-text">
-              Neural Axis <span className="font-normal text-na-text-sec text-xs hidden lg:inline">Learning Solution</span>
-            </span>
+            <div className="flex flex-col leading-none">
+              <span className="font-heading font-bold text-lg tracking-tight text-na-text">Neural Axis</span>
+              <span className="text-[10px] tracking-[0.1em] uppercase text-na-text-sec font-medium">Learning Solution</span>
+            </div>
           </div>
 
           <div className="hidden md:flex items-center gap-8">

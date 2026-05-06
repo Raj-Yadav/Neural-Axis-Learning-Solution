@@ -42,11 +42,11 @@ export default function Navbar() {
             </a>
           </div>
           <Link
-            to="/courses/generative-ai"
+            to="/courses/agentic-ai"
             className="text-na-mint font-medium hover:text-white transition-colors"
             data-testid="top-course-link"
           >
-            New: Generative AI & Agentic AI Bootcamp — Enroll Now →
+            New: 28-Day Agentic AI Engineer Bootcamp — Enroll Now →
           </Link>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function Navbar() {
               </button>
             ))}
             <Link
-              to="/courses/generative-ai"
+              to="/courses/agentic-ai"
               className="text-sm text-na-navy font-medium hover:text-na-navy/70 transition-colors"
               data-testid="nav-courses"
             >
@@ -128,11 +128,11 @@ export default function Navbar() {
               </button>
             ))}
             <Link
-              to="/courses/generative-ai"
+              to="/courses/agentic-ai"
               className="block py-2.5 text-sm text-na-navy font-medium"
               onClick={() => setMobileOpen(false)}
             >
-              Current Course
+              Agentic AI Bootcamp
             </Link>
             <div className="flex items-center gap-4 pt-2 border-t border-[rgba(15,23,42,0.06)]">
               <a href="tel:+919265802045" className="text-sm text-na-text-sec flex items-center gap-1.5">

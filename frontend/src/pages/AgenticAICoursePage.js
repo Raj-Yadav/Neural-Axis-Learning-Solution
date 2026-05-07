@@ -18,6 +18,8 @@ const COHORT_START_LABEL = "1 June 2026";
 const SEATS_REMAINING = 15;
 const WA_LINK =
   "https://wa.me/919265802045?text=Hi%20Neural%20Axis%2C%20I%27d%20like%20to%20enroll%20in%20the%20Agentic%20AI%20Engineer%20Bootcamp%20%28%E2%82%B924%2C999%29.%20Please%20share%20payment%20%26%20joining%20details.";
+// TODO: replace with your real Razorpay payment link (e.g. https://rzp.io/rzp/xxxxx)
+const PAYMENT_LINK = "https://rzp.io/rzp/REPLACE_WITH_RAZORPAY_LINK";
 
 // ============== PHASE DATA (kept verbatim from prior version) ==============
 const phases = [
@@ -178,7 +180,6 @@ const instructor = {
   bio: "8+ years building production ML systems and training enterprise AI teams. Combines hands-on engineering experience with structured curriculum design — every module reflects what real teams ship at IBM, TCS and Wipro.",
   credentials: [
     "Microsoft & Columbia University certified in AI/ML",
-    "deeplearning.ai Deep Learning Specialization",
     "Trained 500+ engineers across IBM, TCS, Wipro, Capgemini",
     "Built production ML at CapitaWorld (Caffe, TensorFlow, audio analysis)",
   ],
@@ -272,6 +273,7 @@ function PhaseAccordionItem({ phase }) {
 // ============== PAGE ==============
 export default function AgenticAICoursePage() {
   const scrollToEnroll = () => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToCurriculum = () => document.getElementById("curriculum")?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]" data-testid="agentic-ai-course-page">
@@ -287,9 +289,11 @@ export default function AgenticAICoursePage() {
               <Phone className="w-3.5 h-3.5" /> +91 9265 802 045
             </a>
             <span className="hidden md:inline text-sm font-semibold text-na-navy">{PRICE}</span>
-            <Button onClick={scrollToEnroll} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 sm:px-6 text-sm" data-testid="agentic-nav-cta">
-              Enroll Now
-            </Button>
+            <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
+              <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 sm:px-6 text-sm" data-testid="agentic-nav-cta">
+                Pay Now
+              </Button>
+            </a>
           </div>
         </div>
       </nav>
@@ -335,18 +339,23 @@ export default function AgenticAICoursePage() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" data-testid="hero-enroll-cta">
+              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer" data-testid="hero-pay-now-cta">
                 <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-7 py-6 text-sm font-medium">
-                  Reserve Your Seat — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
+                  Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" data-testid="hero-enroll-cta">
+                <Button variant="outline" className="rounded-full px-7 py-6 text-sm font-medium border-[rgba(15,23,42,0.15)]">
+                  Enroll via WhatsApp
                 </Button>
               </a>
               <Button
-                variant="outline"
-                onClick={scrollToEnroll}
-                className="rounded-full px-7 py-6 text-sm font-medium border-[rgba(15,23,42,0.15)]"
+                variant="ghost"
+                onClick={scrollToCurriculum}
+                className="rounded-full px-5 py-6 text-sm font-medium text-na-text-sec hover:text-na-text"
                 data-testid="hero-curriculum-cta"
               >
-                See full curriculum
+                See full curriculum →
               </Button>
             </div>
 
@@ -431,11 +440,11 @@ export default function AgenticAICoursePage() {
       </section>
 
       {/* Curriculum (accordion) */}
-      <section className="py-16 lg:py-20 bg-white">
+      <section id="curriculum" className="py-16 lg:py-20 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center mb-10">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">28-Day Curriculum</span>
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text mb-3">
-            Course Outline <em className="not-italic text-na-text-sec font-normal text-xl sm:text-2xl">(Click to expand)</em>
+            Course Outline
           </h2>
           <p className="text-base text-na-text-sec">Four phases. Real tools. Production deployments.</p>
         </div>
@@ -450,12 +459,19 @@ export default function AgenticAICoursePage() {
           <div className="mt-10 text-center py-8 rounded-2xl bg-na-mint-bg/40 border border-na-mint/20">
             <p className="text-base text-na-text mb-1 font-medium">Ready to build production AI agents?</p>
             <p className="text-sm text-na-text-sec mb-5">{PRICE} · Cohort starts {COHORT_START_LABEL}</p>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
-              <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-5 text-sm font-medium" data-testid="mid-cta">
-                Reserve Your Seat <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </a>
-            <p className="text-xs text-na-text-sec/60 mt-3">Only {SEATS_REMAINING} seats per cohort</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
+                <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-5 text-sm font-medium" data-testid="mid-pay-now">
+                  Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="rounded-full px-6 py-5 text-sm font-medium border-na-navy/20 text-na-navy" data-testid="mid-cta">
+                  Enroll via WhatsApp
+                </Button>
+              </a>
+            </div>
+            <p className="text-xs text-na-text-sec/60 mt-4">Only {SEATS_REMAINING} seats per cohort</p>
           </div>
         </div>
       </section>
@@ -605,9 +621,14 @@ export default function AgenticAICoursePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
+                <Button className="bg-na-mint hover:bg-na-mint/90 text-na-navy rounded-full px-8 py-6 text-sm font-semibold" data-testid="agentic-enroll-pay-now">
+                  Pay Now — {PRICE}
+                </Button>
+              </a>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-na-mint hover:bg-na-mint/90 text-na-navy rounded-full px-8 py-6 text-sm font-semibold" data-testid="agentic-enroll-whatsapp">
-                  Enroll Now — {PRICE}
+                <Button variant="outline" className="border-white/30 text-white bg-transparent hover:bg-white/10 rounded-full px-8 py-6 text-sm font-medium" data-testid="agentic-enroll-whatsapp">
+                  Enroll via WhatsApp
                 </Button>
               </a>
               <a href="tel:+919265802045">
@@ -629,9 +650,9 @@ export default function AgenticAICoursePage() {
           <p className="text-[11px] text-na-text-sec">{COHORT_START_LABEL} cohort</p>
           <p className="font-heading text-base font-medium text-na-navy">{PRICE}</p>
         </div>
-        <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
+        <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
           <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 py-2.5 text-sm" data-testid="sticky-mobile-cta">
-            Enroll <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+            Pay Now <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
           </Button>
         </a>
       </div>

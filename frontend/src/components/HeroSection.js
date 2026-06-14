@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
+import HeroAutoScroller from "@/components/HeroAutoScroller";
 
 export default function HeroSection() {
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -77,22 +78,15 @@ export default function HeroSection() {
             className="relative z-10 hidden lg:block"
           >
             <div className="relative">
-              <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 rounded-2xl overflow-hidden -z-0">
                 <img
                   src="https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/242e462092d50a98848b5bb4fc69ca72f938a71543969c178390d7acf9d2d9f7.png"
-                  alt="Pastel gradient"
-                  className="w-full h-full object-cover opacity-60"
+                  alt=""
+                  aria-hidden="true"
+                  className="w-full h-full object-cover opacity-50"
                 />
               </div>
-              <div className="relative bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl p-8 shadow-lg">
-                <img
-                  src="https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/3141701577f08b896de2f9cfffbc7bfc985a7f3fcb6f78c24ffe4243babdd145.png"
-                  alt="Abstract AI visualization representing neural networks and data flow"
-                  loading="lazy"
-                  className="w-full h-auto rounded-xl"
-                  data-testid="hero-image"
-                />
-              </div>
+              <HeroAutoScroller />
             </div>
           </motion.div>
         </div>

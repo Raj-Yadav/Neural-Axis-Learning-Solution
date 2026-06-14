@@ -6,12 +6,14 @@ import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import CourseLandingPage from "@/pages/CourseLandingPage";
 import AgenticAICoursePage from "@/pages/AgenticAICoursePage";
+import ScrollToTop from "@/components/ScrollToTop";
 import "@/App.css";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Toaster position="top-right" richColors theme="light" />
         <Routes>
           <Route path="/" element={<HomePage />} />

@@ -2,8 +2,13 @@
 import pytest
 import requests
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
+# Load BASE_URL from frontend/.env which contains the public backend URL
+load_dotenv(Path(__file__).resolve().parents[2] / "frontend" / ".env")
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', '').rstrip('/')
+assert BASE_URL, "REACT_APP_BACKEND_URL must be set"
 
 # ========== AUTH TESTS ==========
 
@@ -65,6 +70,24 @@ class TestAuth:
         assert resp.status_code == 200
         print("Logout test passed")
 
+    def test_refresh_token(self):
+        """Refresh token should issue new access token via cookie"""
+        session = requests.Session()
+        session.post(f"{BASE_URL}/api/auth/login", json={
+            "email": "admin@neuralaxis.com",
+            "password": "NeuralAxis@2024"
+        })
+        resp = session.post(f"{BASE_URL}/api/auth/refresh")
+        assert resp.status_code == 200, resp.text
+        # /me should still work after refresh
+        me = session.get(f"{BASE_URL}/api/auth/me")
+        assert me.status_code == 200
+        print("Refresh token test passed")
+
+    def test_refresh_no_cookie(self):
+        resp = requests.post(f"{BASE_URL}/api/auth/refresh")
+        assert resp.status_code == 401
+        print("Refresh without cookie test passed")
 
 # ========== LEADS TESTS ==========
 
@@ -173,3 +196,7 @@ class TestLeads:
         for lead in data:
             assert lead["status"] == "new"
         print(f"Filter by status test passed, count={len(data)}")
+    def test_get_lead_not_found(self):
+        resp = self.session.get(f"{BASE_URL}/api/leads/non-existent-id-xyz")
+        assert resp.status_code == 404
+        print("Lead not found test passed")

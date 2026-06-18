@@ -1,0 +1,156 @@
+{
+  "project_name": "Neural Axis",
+  "domain": "Advanced Tech Education / B2B Services",
+  "theme": "light",
+  "archetype": "Archetype 1: Organic & Earthy (blended with Archetype 4 Swiss Clarity)",
+  "vibe": "Ultra-clean, minimalistic, highly professional, approachable, and tech-forward. Avoiding cluttered dark cyberpunk tropes in favor of bright B2B environments and soft pastel abstractions.",
+  "colors": {
+    "background_primary": "#FFFFFF",
+    "background_secondary": "#FAFAFA",
+    "background_pastel_mint": "#EBF7EC",
+    "background_pastel_blue": "#E8F0F8",
+    "background_warm_sand": "#FDFBF7",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "accent_mint": "#A5DFB2",
+    "accent_blue": "#8AB4F8",
+    "accent_navy_cta": "#0B1B3D",
+    "border_subtle": "rgba(15, 23, 42, 0.08)",
+    "rules": [
+      "Use #0B1B3D (Deep Navy) for primary CTA buttons to provide a sharp, unnatural contrast against the soft pastels.",
+      "Never use pure black or grey. All neutral greys must be tinted slightly with blue (cool).",
+      "Gradient usage: Keep them subtle and ambient. Do not use high-contrast linear gradients for backgrounds. Use blurred radial spots of mint, icy blue, and warm sand."
+    ]
+  },
+  "typography": {
+    "heading_font": "Cabinet Grotesk",
+    "heading_fallback": "sans-serif",
+    "body_font": "IBM Plex Sans",
+    "body_fallback": "sans-serif",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-medium text-[#0F172A]",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-[#0F172A]",
+      "h3": "text-xl sm:text-2xl font-medium",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed text-[#475569]",
+      "overline": "text-xs font-semibold uppercase tracking-[0.2em] text-[#475569]"
+    },
+    "rules": [
+      "Do NOT use Inter, Roboto, or Open Sans.",
+      "Headings must have tight letter spacing (tracking-tight or tracking-tighter).",
+      "Overlines/Labels MUST be Uppercase + Tiny + Wide Spacing.",
+      "Avoid centering text by default; prioritize left-alignment for B2B readability."
+    ]
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing Philosophy. Use 2-3x more spacing than typical. p-8 to p-24.",
+    "grids": {
+      "marketing_bento": "grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 lg:gap-12",
+      "dashboard": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    },
+    "surface_strategy": {
+      "cards": "Flat background, 1px subtle border (border-border_subtle). Minimal border radius (rounded-xl maximum). No heavy drop shadows. On hover: slight lift (-translate-y-1) and shadow-sm.",
+      "glassmorphism": "Used ONLY for sticky headers. bg-white/70, backdrop-blur-xl, 1px delicate inner stroke (border-white/40). Do not use for health/education data displays."
+    }
+  },
+  "interactive_motion": {
+    "libraries": [
+      "framer-motion (for scroll-triggered fade-ins and micro-interactions)",
+      "lucide-react (for iconography)"
+    ],
+    "rules": [
+      "Hover States: ALWAYS explicitly set text color on hover. Use a slightly lighter/darker hue of the active state.",
+      "Entrance: Staggered fade-up for lists and grid items.",
+      "Motion: Minimalist and purposeful. No bouncy or distracting animations.",
+      "All interactive elements MUST include data-testid attribute."
+    ]
+  },
+  "media_assets": {
+    "logos": {
+      "ibm": {
+        "url": "https://images.unsplash.com/photo-1562705121-e624542c7b9b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwxfHxpYm0lMjBsb2dvfGVufDB8fHx8MTc3NzI3NTE5M3ww&ixlib=rb-4.1.0&q=85",
+        "description": "IBM Logo for the 'Proven Track Record' section."
+      }
+    },
+    "backgrounds": {
+      "pastel_gradient": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/242e462092d50a98848b5bb4fc69ca72f938a71543969c178390d7acf9d2d9f7.png",
+        "description": "Soft muted pastel gradient background. Use in Hero section or Lead Gen wrapper."
+      }
+    },
+    "abstract_art": {
+      "hero_ai": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/3141701577f08b896de2f9cfffbc7bfc985a7f3fcb6f78c24ffe4243babdd145.png",
+        "description": "Minimal abstract 3D composition for AI. Use as the main visual in the Hero section."
+      },
+      "core_tech": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/e6e1b7f24d7b124d34ed52d5fc27f3a94d22889c2693a628d280c3427be0ac4a.png",
+        "description": "Clean abstract representation of a data workflow. Use in the Core Technologies bento grid."
+      },
+      "nature_ai": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/232eb2ab-127e-45ab-8692-12dac3629dce/images/cc75a4b3c744f3e1e6cb804dc424df833096d14f63a34ca61b6b0d00f6cae8d9.png",
+        "description": "Organic neural pathways. Good for the Partnership Models section background accent."
+      }
+    },
+    "photography": {
+      "campus": {
+        "url": "https://images.unsplash.com/photo-1775933802859-27889463db79?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwY2FtcHVzJTIwZ2xhc3MlMjBidWlsZGluZ3xlbnwwfHx8fDE3NzcyNzUxOTN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Modern university glass building. Use in the Track Record / Academic Integration section."
+      },
+      "corporate_training": {
+        "url": "https://images.unsplash.com/photo-1776039325240-02916820bfeb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBjb3Jwb3JhdGUlMjB0cmFpbmluZyUyMHNlbWluYXJ8ZW58MHx8fHwxNzc3Mjc1MTkzfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Professional corporate training seminar. Use for the FDP / Bootcamp offerings."
+      }
+    }
+  },
+  "page_sections": [
+    {
+      "name": "Navigation",
+      "layout": "Sticky Header with Crystal Glassmorphism. Text-based logo 'Neural Axis' on left, links center, 'Book Consultation' CTA on right.",
+      "components": ["pure HTML/Tailwind", "lucide-react icons"]
+    },
+    {
+      "name": "Hero Section",
+      "layout": "Split layout. Left: Overline 'Industry Integration Partner', H1 'Advanced AI & Data Science', Subtext, two CTAs ('Partner With Us' solid navy, 'Book a Free Workshop' subtle outline). Right: Floating glassmorphic card containing `hero_ai` image over `pastel_gradient` background.",
+      "components": ["framer-motion for entrance"]
+    },
+    {
+      "name": "Core Technologies",
+      "layout": "Bento Grid (Mode A: Tetris). Span logic mixing 3 shapes. The Hero card (col-span-8) featuring `core_tech` abstract image and detailing 'Agentic AI Workflows'. Smaller cards for Python, ML, DL. Generous p-8 padding inside cards.",
+      "components": ["divs with border-subtle and flat backgrounds"]
+    },
+    {
+      "name": "Partnership Models",
+      "layout": "Grid of 3 tall cards. 'Faculty Development Programs' (featuring corporate_training image), 'Intensive Student Bootcamps', 'Curriculum Integration'. Cards must have 1px solid stroke, muted pastel hover states.",
+      "components": ["Shadcn customized cards (flat, rectangular, dense)"]
+    },
+    {
+      "name": "Proven Track Record",
+      "layout": "Asymmetric layout. Editorial Ribbon Marquee slowly scrolling university and corporate partner names (including IBM). Visuals showcasing `campus` photography. Massive stat '8+ Years' taking up negative space.",
+      "components": ["react-fast-marquee (slow, serene drift, serif or mono text)"]
+    },
+    {
+      "name": "Lead Generation / Contact",
+      "layout": "Two-column page structure. Left: Context/Authority text. Right: Single-column vertical stacked form in a clean white card. Labels ABOVE fields. Minimal fields: Name, Role (TPO/Dean/HOD), Institution, Email.",
+      "components": ["Shadcn Form, Input, Select, Button. Customized to remove Vercel-look."]
+    },
+    {
+      "name": "Admin Dashboard",
+      "layout": "Control Room Grid. Strict hierarchy, dense spacing. Sidebar navigation. Main area showing lead table and metrics.",
+      "components": ["Shadcn Table, Cards, Dialogs. No full-screen gradients. Vibrant primary + neutral monochrome."]
+    }
+  ],
+  "testing_attributes": {
+    "required": true,
+    "format": "kebab-case, role-based",
+    "examples": ["data-testid='hero-cta-button'", "data-testid='contact-form-submit'", "data-testid='admin-login-input'"]
+  },
+  "instructions_to_main_agent": [
+    "You MUST use Cabinet Grotesk for headings and IBM Plex Sans for body text.",
+    "Do NOT use 'Inter' for any typography.",
+    "All interactive elements MUST have a data-testid attribute.",
+    "Use the exact media URLs provided in the media_assets object. Do NOT use placeholders.",
+    "When building the contact form, follow the B2B SaaS trend: labels outside/above inputs, single column, clean minimal aesthetic.",
+    "For the admin panel, prioritize functional clarity. Use Shadcn components heavily but adapt them to the pastel/earthy light theme."
+  ]
+}

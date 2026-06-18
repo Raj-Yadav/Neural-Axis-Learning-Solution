@@ -340,6 +340,10 @@ async def startup():
     await db.leads.create_index("status")
     logger.info("Database indexes created, admin seeded")
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
 # Include the router
 app.include_router(api_router)
 

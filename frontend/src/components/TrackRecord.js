@@ -163,7 +163,7 @@ export default function TrackRecord() {
             </p>
             <p className="text-base leading-relaxed text-na-text-sec">
               Our team comprises ML engineers, AI architects, and data scientists with 
-              real deployment experience — people who've built production RAG systems, 
+              real deployment experience — people who&apos;ve built production RAG systems, 
               fine-tuned LLMs, and shipped agentic AI workflows. That real-world DNA is 
               embedded in every program we design for your institution.
             </p>
@@ -200,8 +200,8 @@ export default function TrackRecord() {
                   </tr>
                 </thead>
                 <tbody>
-                  {recentTrainings.map((t, i) => (
-                    <tr key={i} className="border-b border-[rgba(15,23,42,0.04)] last:border-0 hover:bg-[#FAFAFA] transition-colors">
+                  {recentTrainings.map((t) => (
+                    <tr key={`${t.client}-${t.date}-${t.name}`} className="border-b border-[rgba(15,23,42,0.04)] last:border-0 hover:bg-[#FAFAFA] transition-colors">
                       <td className="px-5 py-3.5 text-na-text font-medium">{t.name}</td>
                       <td className="px-5 py-3.5 text-na-text-sec">{t.client}</td>
                       <td className="px-5 py-3.5 text-na-text-sec hidden sm:table-cell">{t.audience}</td>

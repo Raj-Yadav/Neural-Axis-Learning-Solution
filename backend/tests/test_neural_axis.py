@@ -89,6 +89,7 @@ class TestAuth:
         assert resp.status_code == 401
         print("Refresh without cookie test passed")
 
+
 # ========== LEADS TESTS ==========
 
 class TestLeads:
@@ -196,6 +197,7 @@ class TestLeads:
         for lead in data:
             assert lead["status"] == "new"
         print(f"Filter by status test passed, count={len(data)}")
+
     def test_get_lead_not_found(self):
         resp = self.session.get(f"{BASE_URL}/api/leads/non-existent-id-xyz")
         assert resp.status_code == 404

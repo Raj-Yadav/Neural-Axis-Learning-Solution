@@ -23,7 +23,7 @@ export default function BookingSection() {
             Schedule a 15-Minute Call
           </h2>
           <p className="text-base leading-relaxed text-na-text-sec max-w-xl mx-auto mb-10">
-            Pick a time that works for you. Our partnerships team will discuss your institution's 
+            Pick a time that works for you. Our partnerships team will discuss your institution&apos;s 
             needs and recommend the right program.
           </p>
         </motion.div>
@@ -60,8 +60,8 @@ export default function BookingSection() {
               Free 15-Minute Consultation
             </h3>
             <p className="text-sm text-na-text-sec mb-6 max-w-md mx-auto">
-              Discuss your institution's AI training needs with our partnerships team. 
-              No obligation — just a focused conversation about what's possible.
+              Discuss your institution&apos;s AI training needs with our partnerships team. 
+              No obligation — just a focused conversation about what&apos;s possible.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
               <div className="flex items-center gap-2 text-sm text-na-text-sec">

@@ -93,7 +93,7 @@ export default function ContactForm() {
             </h2>
             <p className="text-base leading-relaxed text-na-text-sec mb-8">
               For TPOs, Deans, and academic decision-makers. Book a free 15-minute consultation
-              to discuss how Neural Axis can transform your institution's AI education offerings.
+              to discuss how Neural Axis can transform your institution&apos;s AI education offerings.
             </p>
             <div className="space-y-4 text-sm text-na-text-sec">
               <div className="flex items-start gap-3">
@@ -102,7 +102,7 @@ export default function ContactForm() {
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-na-mint mt-2 flex-shrink-0" />
-                <span>Custom proposals tailored to your department's needs</span>
+                <span>Custom proposals tailored to your department&apos;s needs</span>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-na-mint mt-2 flex-shrink-0" />

@@ -40,6 +40,7 @@ jobs:
           MONGO_URL: "mongodb://localhost:27017/dummy"
           DB_NAME: "neural_axis_test"
           JWT_SECRET: "test-secret"
+          REACT_APP_BACKEND_URL: "http://localhost:8000"
 
   # -----------------------------------------------------------------
   # JOB 2: Frontend Testing (React)
@@ -64,7 +65,7 @@ jobs:
 
       - name: Install Dependencies
         # Important: Added --legacy-peer-deps to bypass React 19 conflicts
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Run Frontend Tests
         run: npm run test:ci

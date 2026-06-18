@@ -109,7 +109,7 @@ export default function CourseLandingPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">Course Overview</span>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text mb-6">
-              What You'll Master
+              What You&apos;ll Master
             </h2>
             <p className="text-base leading-relaxed text-na-text-sec max-w-3xl mb-12">
               This bootcamp covers the complete AI engineering stack — from foundational Python and ML 

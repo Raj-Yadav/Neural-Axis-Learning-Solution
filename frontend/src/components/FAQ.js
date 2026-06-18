@@ -62,12 +62,12 @@ export default function FAQ() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <Accordion type="single" collapsible className="space-y-3" data-testid="faq-accordion">
-            {faqs.map((faq, i) => (
+            {faqs.map((faq) => (
               <AccordionItem
-                key={i}
-                value={`item-${i}`}
+                key={faq.q}
+                value={faq.q}
                 className="border border-[rgba(15,23,42,0.08)] rounded-xl bg-white px-6 data-[state=open]:shadow-sm transition-shadow"
-                data-testid={`faq-item-${i}`}
+                data-testid={`faq-item-${faq.q.slice(0, 30).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
               >
                 <AccordionTrigger className="text-sm font-medium text-na-text text-left hover:no-underline py-5">
                   {faq.q}

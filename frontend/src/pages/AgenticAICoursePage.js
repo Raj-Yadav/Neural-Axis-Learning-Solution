@@ -374,7 +374,7 @@ export default function AgenticAICoursePage() {
       <section className="py-16 lg:py-20 bg-[#FAFAFA]" data-testid="instructor-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">Who's teaching</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">Who&apos;s teaching</span>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text">
               Meet your instructor
             </h2>
@@ -498,7 +498,7 @@ export default function AgenticAICoursePage() {
                 data-testid={`student-testimonial-${i}`}
               >
                 <Quote className="w-6 h-6 text-na-mint mb-4" />
-                <p className="text-sm leading-relaxed text-na-text-sec mb-6 italic">"{t.quote}"</p>
+                <p className="text-sm leading-relaxed text-na-text-sec mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div>
                   <p className="text-sm font-medium text-na-text">{t.name}</p>
                   <p className="text-xs text-na-text-sec">{t.role}</p>
@@ -561,7 +561,7 @@ export default function AgenticAICoursePage() {
       <section className="py-16 lg:py-20 bg-[#FAFAFA]" data-testid="what-youll-get">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">What's included</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-3 block">What&apos;s included</span>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-na-text">
               Everything you need to ship
             </h2>

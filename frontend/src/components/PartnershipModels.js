@@ -57,7 +57,7 @@ export default function PartnershipModels() {
           </h2>
           <p className="text-base leading-relaxed text-na-text-sec mt-4 max-w-2xl">
             Flexible engagement models designed for Indian universities and institutions. 
-            Each program is customizable to your department's specific needs.
+            Each program is customizable to your department&apos;s specific needs.
           </p>
         </motion.div>
 

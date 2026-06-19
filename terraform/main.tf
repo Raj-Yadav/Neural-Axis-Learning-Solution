@@ -78,6 +78,12 @@ resource "azurerm_container_app" "backend" {
     max_replicas = 10
   }
 
+  lifecycle {
+    ignore_changes = [
+      template[0].container[0].image,
+    ]
+  }
+
   ingress {
     allow_insecure_connections = false
     external_enabled           = true

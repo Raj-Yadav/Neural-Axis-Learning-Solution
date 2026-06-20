@@ -334,10 +334,14 @@ async def seed_admin():
 
 @app.on_event("startup")
 async def startup():
+    try:
+        await db.users.create_index("email", unique=True)
+        await db.leads.create_index("created_at")
+        await db.leads.create_index("status")
+    except Exception as e:
+        logger.warning(f"Index creation skipped: {e}")
+        
     await seed_admin()
-    await db.users.create_index("email", unique=True)
-    await db.leads.create_index("created_at")
-    await db.leads.create_index("status")
     logger.info("Database indexes created, admin seeded")
 
 @app.get("/health")

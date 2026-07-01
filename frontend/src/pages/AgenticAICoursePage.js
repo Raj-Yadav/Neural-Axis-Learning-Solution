@@ -13,6 +13,14 @@ import {
 import CountdownTimer from "@/components/CountdownTimer";
 import PaymentModal from "@/components/PaymentModal";
 
+// ============== ANIMATION VARIANTS (extracted to avoid inline-object allocations per render) ==============
+const FADE_UP_INITIAL = { opacity: 0, y: 20 };
+const FADE_UP_ANIMATE = { opacity: 1, y: 0 };
+const VIEWPORT_ONCE = { once: true };
+const TRANS_HERO = { duration: 0.6 };
+const TRANS_STANDARD = { duration: 0.5 };
+const TRANS_STANDARD_DELAYED = { duration: 0.5, delay: 0.1 };
+
 // ============== CONSTANTS (single source of truth) ==============
 const PRICE = "₹24,999";
 const PRICE_AMOUNT = 24999;
@@ -309,7 +317,7 @@ export default function AgenticAICoursePage() {
         <div className="absolute bottom-0 right-0 w-[35%] h-[50%] bg-[radial-gradient(circle,rgba(138,180,248,0.15)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <motion.div initial={FADE_UP_INITIAL} animate={FADE_UP_ANIMATE} transition={TRANS_HERO}>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-na-text-sec mb-5">Cohort-Based Bootcamp · Live Online</p>
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-medium text-na-text leading-[1.1] mb-7">
               Learn by Doing.<br />
@@ -385,10 +393,10 @@ export default function AgenticAICoursePage() {
 
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              initial={FADE_UP_INITIAL}
+              whileInView={FADE_UP_ANIMATE}
+              viewport={VIEWPORT_ONCE}
+              transition={TRANS_STANDARD}
               className="lg:col-span-2"
             >
               <div className="rounded-2xl bg-gradient-to-br from-na-navy to-[#122850] p-8 text-white shadow-md">
@@ -413,10 +421,10 @@ export default function AgenticAICoursePage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              initial={FADE_UP_INITIAL}
+              whileInView={FADE_UP_ANIMATE}
+              viewport={VIEWPORT_ONCE}
+              transition={TRANS_STANDARD_DELAYED}
               className="lg:col-span-3"
             >
               <h3 className="font-heading text-base font-medium text-na-text mb-5">Professional journey</h3>
@@ -491,9 +499,9 @@ export default function AgenticAICoursePage() {
             {testimonials.map((t, i) => (
               <motion.div
                 key={t.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={FADE_UP_INITIAL}
+                whileInView={FADE_UP_ANIMATE}
+                viewport={VIEWPORT_ONCE}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="p-7 rounded-xl border border-[rgba(15,23,42,0.08)] bg-white hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300"
                 data-testid={`student-testimonial-${i}`}
@@ -528,9 +536,9 @@ export default function AgenticAICoursePage() {
             {capstones.map((c, i) => (
               <motion.div
                 key={c.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={FADE_UP_INITIAL}
+                whileInView={FADE_UP_ANIMATE}
+                viewport={VIEWPORT_ONCE}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="p-7 rounded-xl border border-[rgba(15,23,42,0.08)] bg-[#FAFAFA] hover:-translate-y-1 hover:shadow-sm transition-all duration-300"
                 data-testid={`capstone-${i}`}
@@ -579,9 +587,9 @@ export default function AgenticAICoursePage() {
             ].map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                initial={FADE_UP_INITIAL}
+                whileInView={FADE_UP_ANIMATE}
+                viewport={VIEWPORT_ONCE}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 className="p-7 rounded-xl bg-white border border-[rgba(15,23,42,0.08)] hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300"
                 data-testid={`get-card-${i}`}
@@ -600,7 +608,7 @@ export default function AgenticAICoursePage() {
       {/* Final Enroll CTA */}
       <section id="enroll" className="py-20 lg:py-24 bg-na-navy text-white" data-testid="agentic-enroll-section">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+          <motion.div initial={FADE_UP_INITIAL} whileInView={FADE_UP_ANIMATE} viewport={VIEWPORT_ONCE} transition={TRANS_STANDARD}>
             <p className="text-3xl mb-4">🏆</p>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium mb-4">
               Ready to become an Agentic AI Engineer?

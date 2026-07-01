@@ -24,12 +24,6 @@ variable "backend_subdomain" {
   default     = "api.neuralaxis.co.in"
 }
 
-variable "mongo_url" {
-  type        = string
-  description = "MongoDB Connection String"
-  sensitive   = true
-}
-
 variable "db_name" {
   type        = string
   description = "MongoDB Database Name"

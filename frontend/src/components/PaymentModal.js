@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import axios from "axios";
 import { QRCodeSVG } from "qrcode.react";
 import { toast } from "sonner";
@@ -21,6 +21,8 @@ import {
   ShieldCheck,
   ArrowRight,
   ArrowLeft,
+  AlertCircle,
+  RefreshCw,
 } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -41,6 +43,7 @@ export default function PaymentModal({ open, onOpenChange, course, amount }) {
   const [step, setStep] = useState(1);
   const [config, setConfig] = useState(null);
   const [loadingConfig, setLoadingConfig] = useState(false);
+  const [configError, setConfigError] = useState(null);
   const [copied, setCopied] = useState(false);
 
   const [form, setForm] = useState({
@@ -67,16 +70,33 @@ export default function PaymentModal({ open, onOpenChange, course, amount }) {
     }
   }, [open]);
 
-  // Fetch UPI config
+  // Fetch UPI config (with retry support)
+  const fetchConfig = useCallback(() => {
+    setLoadingConfig(true);
+    setConfigError(null);
+    axios
+      .get(`${API}/payment/config`, { timeout: 10000 })
+      .then((res) => {
+        if (!res.data?.upi_id) {
+          setConfigError("Payment is not configured yet. Please contact us on WhatsApp.");
+          return;
+        }
+        setConfig(res.data);
+      })
+      .catch((err) => {
+        const msg =
+          err?.code === "ECONNABORTED"
+            ? "Payment service is slow to respond. Please retry."
+            : "Unable to load payment details. Please retry.";
+        setConfigError(msg);
+      })
+      .finally(() => setLoadingConfig(false));
+  }, []);
+
   useEffect(() => {
     if (!open || config) return;
-    setLoadingConfig(true);
-    axios
-      .get(`${API}/payment/config`)
-      .then((res) => setConfig(res.data))
-      .catch(() => toast.error("Unable to load payment details. Please try again."))
-      .finally(() => setLoadingConfig(false));
-  }, [open, config]);
+    fetchConfig();
+  }, [open, config, fetchConfig]);
 
   const upiLink = useMemo(() => {
     if (!config?.upi_id) return "";
@@ -183,9 +203,33 @@ export default function PaymentModal({ open, onOpenChange, course, amount }) {
         {/* STEP 1: UPI Payment */}
         {step === 1 && (
           <div className="px-6 py-5" data-testid="payment-step-1">
-            {loadingConfig || !config ? (
-              <div className="py-16 flex items-center justify-center">
+            {loadingConfig ? (
+              <div className="py-16 flex flex-col items-center justify-center gap-3" data-testid="payment-loading">
                 <Loader2 className="w-6 h-6 animate-spin text-na-navy" />
+                <p className="text-xs text-na-text-sec">Loading payment details…</p>
+              </div>
+            ) : configError || !config ? (
+              <div className="py-10 flex flex-col items-center gap-3 text-center" data-testid="payment-error">
+                <div className="w-11 h-11 rounded-full bg-amber-50 flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-amber-600" />
+                </div>
+                <p className="text-sm text-na-text">{configError || "Payment details unavailable."}</p>
+                <Button
+                  onClick={fetchConfig}
+                  variant="outline"
+                  className="rounded-full text-sm mt-1"
+                  data-testid="payment-retry-btn"
+                >
+                  <RefreshCw className="w-3.5 h-3.5 mr-1.5" /> Retry
+                </Button>
+                <a
+                  href="https://wa.me/919265802045?text=Hi%20Neural%20Axis%2C%20I%27m%20having%20trouble%20with%20payment.%20Please%20help."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-na-text-sec underline hover:text-na-text mt-1"
+                >
+                  Or contact us on WhatsApp
+                </a>
               </div>
             ) : (
               <>

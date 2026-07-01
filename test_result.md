@@ -137,7 +137,7 @@ backend:
 frontend:
   - task: "Payment Modal (UPI) on Agentic AI Course Page"
     implemented: true
-    working: "NA"
+    working: true
     file: "frontend/src/components/PaymentModal.js, frontend/src/pages/AgenticAICoursePage.js"
     stuck_count: 0
     priority: "high"
@@ -146,10 +146,13 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "New PaymentModal component with 3 steps: (1) UPI QR + deep link + copy UPI ID, (2) form for name/email/phone/UPI txn ref, (3) success screen. Wired to all 4 Pay Now buttons on /courses/agentic-ai (nav, hero, mid-CTA, final enroll, sticky mobile). Uses qrcode.react for QR generation of upi://pay?pa=...&pn=...&am=24999&cu=INR&tn=..."
+        - working: true
+          agent: "testing"
+          comment: "✅ VERIFIED: All 4 Pay Now buttons (nav, hero, mid-page, final enrollment) open modal correctly. QR code renders with correct UPI details. Full 3-step flow works: Step 1 shows QR + UPI ID + copy button → Step 2 form with validation (name, email, phone, txn ref) → Step 3 success screen with enrollment details. Sticky mobile bar visible on mobile viewport. Minor: sticky mobile CTA blocked by overlay (not critical)."
 
   - task: "Admin Dashboard Enrollments Tab"
     implemented: true
-    working: "NA"
+    working: true
     file: "frontend/src/pages/AdminDashboard.js"
     stuck_count: 0
     priority: "medium"
@@ -158,6 +161,9 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "Added top-level tab switcher (Leads / Enrollments) in admin dashboard. Enrollments view has stats (total, pending, verified, revenue), status filters, table with row-level actions (view details, mark verified, mark rejected, delete). Detail dialog allows status + notes update."
+        - working: true
+          agent: "testing"
+          comment: "✅ VERIFIED: Enrollments tab working perfectly. Stats cards show Total Enrollments (3), Pending (2), Verified (1), Revenue ₹24,999. All 4 filter buttons work (All, Pending Verification, Verified, Rejected). Table displays enrollments with correct data. Row actions work: Mark Verified changes status badge and updates revenue stat. Detail dialog shows all enrollment info (name, email, phone, amount, UPI txn ref, payer UPI, paid-to UPI). Status dropdown and notes textarea functional. Leads tab regression passed - no issues."
 
 metadata:
   created_by: "main_agent"
@@ -182,3 +188,30 @@ agent_communication:
       message: "26/26 backend tests passed. GET /api/payment/config returns correct UPI creds. Full enrollment CRUD works — public POST accepts required fields + email validation (422 on invalid), auth-only GET/PATCH/DELETE correctly reject unauth requests (401), status filter works, stats endpoint correctly calculates revenue from VERIFIED enrollments only. No regressions on lead/auth endpoints."
     - agent: "main"
       message: "Backend confirmed working. Marking backend tasks as working:true. Frontend testing pending user approval."
+
+# ============ Bug Fix Round 1 (User Reported) ============
+    - agent: "user"
+      message: "Some links don't work. Payment link giving error. Shared screenshot showing PaymentModal stuck on infinite loading spinner (only step-1 header + spinner visible)."
+    - agent: "main"
+      message: "Root cause: PaymentModal had no error/retry handling if /api/payment/config failed or was slow — it would silently show only spinner. Also no request timeout. Fix applied in PaymentModal.js: added 10s axios timeout, new configError state, dedicated error UI with retry button and WhatsApp fallback link, differentiated ECONNABORTED (slow) from network errors. Also verified separately: (1) API endpoint returns 200 <100ms from public preview URL, (2) full end-to-end flow works via Playwright — modal opens, QR renders, form submits, thank-you page shows enrollment ID + txn ref + status. The 'neuralaxis.co.in' link user mentioned is their externally-deployed site which hasn't been redeployed with new code — needs user to Save-to-Github then redeploy externally."
+    - agent: "testing"
+      message: "✅ BUG FIX VERIFICATION COMPLETE - ALL TESTS PASSED. Tested all 6 scenarios from review request: (1) Happy path: All 4 Pay Now buttons open modal, QR loads in 3-5s (NO infinite spinner), full flow Step 1→2→3 works, enrollment created with ID, txn ref TEST123456789, status Pending Verification. (2) Form validation: Empty name, invalid email 'abc', invalid phone 'abcdefghij', short txn ref all correctly prevented submission. (3) Error state: Verified retry button exists, WhatsApp fallback link present, 10s timeout implemented, normal flow does NOT hit stuck-spinner. (4) Sticky mobile bar: Visible on mobile viewport (390×844). (5) Admin enrollments tab: Stats cards (Total 3, Pending 2, Verified 1, Revenue ₹24,999), filter buttons work, Mark Verified action updates status and revenue, detail dialog shows all fields (UPI txn ref, payer UPI, paid-to UPI, status dropdown, notes textarea). (6) Regression: Leads tab still working. Minor issues (non-critical): Sticky mobile CTA blocked by 'Made with Emergent' badge overlay, copy button visual confirmation not detected. No console errors or network failures (except expected 401 on /api/auth/me for public page). BUG FIX SUCCESSFUL - infinite spinner issue resolved."
+
+frontend_bug_fix:
+  - task: "PaymentModal — infinite loading spinner"
+    implemented: true
+    working: true
+    file: "frontend/src/components/PaymentModal.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "user"
+          comment: "User reported payment modal stuck on infinite loading spinner (screenshot provided)."
+        - working: "NA"
+          agent: "main"
+          comment: "Added 10s axios timeout, configError state, error UI with Retry button + WhatsApp fallback link. Also verified end-to-end via Playwright: modal opens → QR renders → form submits → thank-you shown."
+        - working: true
+          agent: "testing"
+          comment: "✅ BUG FIX VERIFIED - All 4 Pay Now buttons open modal correctly. QR code loads within 3-5 seconds (NO infinite spinner). UPI ID rajyadav12121993@okicici, Payee Raj Yadav, Amount ₹24,999 all displayed correctly. Error handling implemented: 10s timeout, retry button, WhatsApp fallback. Full happy path works: Step 1 (QR) → Step 2 (form with validation) → Step 3 (success with enrollment ID, txn ref TEST123456789, status Pending Verification). Form validation working for empty name, invalid email, invalid phone, short txn ref. Admin enrollments tab working: stats cards, filter buttons, Mark Verified action, detail dialog with status dropdown and notes textarea. Leads tab regression passed. Minor issue: sticky mobile bar button blocked by 'Made with Emergent' badge overlay (not critical). Copy button works but visual confirmation not detected (minor)."

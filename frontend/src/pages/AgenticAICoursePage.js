@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -10,16 +11,20 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import CountdownTimer from "@/components/CountdownTimer";
+import PaymentModal from "@/components/PaymentModal";
 
 // ============== CONSTANTS (single source of truth) ==============
 const PRICE = "₹24,999";
+const PRICE_AMOUNT = 24999;
+const COURSE_NAME = "Agentic AI Engineer Bootcamp";
 const COHORT_START_ISO = "2026-06-01T09:00:00+05:30"; // 1 June 2026, 9 AM IST
 const COHORT_START_LABEL = "1 June 2026";
 const SEATS_REMAINING = 15;
 const WA_LINK =
   "https://wa.me/919265802045?text=Hi%20Neural%20Axis%2C%20I%27d%20like%20to%20enroll%20in%20the%20Agentic%20AI%20Engineer%20Bootcamp%20%28%E2%82%B924%2C999%29.%20Please%20share%20payment%20%26%20joining%20details.";
 // TODO: replace with your real Razorpay payment link (e.g. https://rzp.io/rzp/xxxxx)
-const PAYMENT_LINK = "https://rzp.io/rzp/REPLACE_WITH_RAZORPAY_LINK";
+// Kept only for reference — payment now handled via PaymentModal (UPI)
+// const PAYMENT_LINK = "https://rzp.io/rzp/REPLACE_WITH_RAZORPAY_LINK";
 
 // ============== PHASE DATA (kept verbatim from prior version) ==============
 const phases = [
@@ -272,6 +277,8 @@ function PhaseAccordionItem({ phase }) {
 
 // ============== PAGE ==============
 export default function AgenticAICoursePage() {
+  const [payOpen, setPayOpen] = useState(false);
+  const openPay = () => setPayOpen(true);
   const scrollToEnroll = () => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" });
   const scrollToCurriculum = () => document.getElementById("curriculum")?.scrollIntoView({ behavior: "smooth" });
 
@@ -289,11 +296,9 @@ export default function AgenticAICoursePage() {
               <Phone className="w-3.5 h-3.5" /> +91 9265 802 045
             </a>
             <span className="hidden md:inline text-sm font-semibold text-na-navy">{PRICE}</span>
-            <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
-              <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 sm:px-6 text-sm" data-testid="agentic-nav-cta">
-                Pay Now
-              </Button>
-            </a>
+            <Button onClick={openPay} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 sm:px-6 text-sm" data-testid="agentic-nav-cta">
+              Pay Now
+            </Button>
           </div>
         </div>
       </nav>
@@ -339,11 +344,9 @@ export default function AgenticAICoursePage() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer" data-testid="hero-pay-now-cta">
-                <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-7 py-6 text-sm font-medium">
-                  Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </a>
+              <Button onClick={openPay} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-7 py-6 text-sm font-medium" data-testid="hero-pay-now-cta">
+                Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer" data-testid="hero-enroll-cta">
                 <Button variant="outline" className="rounded-full px-7 py-6 text-sm font-medium border-[rgba(15,23,42,0.15)]">
                   Enroll via WhatsApp
@@ -460,11 +463,9 @@ export default function AgenticAICoursePage() {
             <p className="text-base text-na-text mb-1 font-medium">Ready to build production AI agents?</p>
             <p className="text-sm text-na-text-sec mb-5">{PRICE} · Cohort starts {COHORT_START_LABEL}</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-5 text-sm font-medium" data-testid="mid-pay-now">
-                  Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </a>
+              <Button onClick={openPay} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-8 py-5 text-sm font-medium" data-testid="mid-pay-now">
+                Pay Now — {PRICE} <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="rounded-full px-6 py-5 text-sm font-medium border-na-navy/20 text-na-navy" data-testid="mid-cta">
                   Enroll via WhatsApp
@@ -621,11 +622,9 @@ export default function AgenticAICoursePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-na-mint hover:bg-na-mint/90 text-na-navy rounded-full px-8 py-6 text-sm font-semibold" data-testid="agentic-enroll-pay-now">
-                  Pay Now — {PRICE}
-                </Button>
-              </a>
+              <Button onClick={openPay} className="bg-na-mint hover:bg-na-mint/90 text-na-navy rounded-full px-8 py-6 text-sm font-semibold" data-testid="agentic-enroll-pay-now">
+                Pay Now — {PRICE}
+              </Button>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="border-white/30 text-white bg-transparent hover:bg-white/10 rounded-full px-8 py-6 text-sm font-medium" data-testid="agentic-enroll-whatsapp">
                   Enroll via WhatsApp
@@ -650,11 +649,9 @@ export default function AgenticAICoursePage() {
           <p className="text-[11px] text-na-text-sec">{COHORT_START_LABEL} cohort</p>
           <p className="font-heading text-base font-medium text-na-navy">{PRICE}</p>
         </div>
-        <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
-          <Button className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 py-2.5 text-sm" data-testid="sticky-mobile-cta">
-            Pay Now <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-          </Button>
-        </a>
+        <Button onClick={openPay} className="bg-na-navy text-white hover:bg-na-navy/90 rounded-full px-5 py-2.5 text-sm flex-shrink-0" data-testid="sticky-mobile-cta">
+          Pay Now <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+        </Button>
       </div>
 
       {/* Footer */}
@@ -664,6 +661,14 @@ export default function AgenticAICoursePage() {
           <Link to="/courses/generative-ai" className="text-sm text-white/40 hover:text-white/60 transition-colors">Other Courses</Link>
         </div>
       </footer>
+
+      {/* Payment Modal */}
+      <PaymentModal
+        open={payOpen}
+        onOpenChange={setPayOpen}
+        course={COURSE_NAME}
+        amount={PRICE_AMOUNT}
+      />
     </div>
   );
 }

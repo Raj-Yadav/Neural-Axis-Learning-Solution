@@ -104,6 +104,20 @@ class LeadUpdate(BaseModel):
     status: Optional[str] = None
     notes: Optional[str] = None
 
+class EnrollmentCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str
+    course: str
+    amount: float
+    upi_txn_ref: str
+    payer_upi: Optional[str] = None
+    notes: Optional[str] = None
+
+class EnrollmentUpdate(BaseModel):
+    status: Optional[str] = None
+    notes: Optional[str] = None
+
 # Create the app and router
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
@@ -239,6 +253,99 @@ async def delete_lead(lead_id: str, request: Request):
         raise HTTPException(status_code=404, detail="Lead not found")
     return {"message": "Lead deleted successfully"}
 
+# ========== PAYMENT CONFIG (public) ==========
+
+@api_router.get("/payment/config")
+async def payment_config():
+    """Public endpoint that exposes UPI payment config for the frontend."""
+    return {
+        "upi_id": os.environ.get("UPI_ID", ""),
+        "payee_name": os.environ.get("UPI_PAYEE_NAME", ""),
+        "currency": "INR",
+    }
+
+# ========== ENROLLMENT ENDPOINTS ==========
+
+@api_router.post("/enrollments")
+async def create_enrollment(enrollment: EnrollmentCreate):
+    """Public endpoint — called after user pays via UPI and reports transaction reference."""
+    doc = enrollment.model_dump()
+    doc["id"] = str(uuid.uuid4())
+    doc["status"] = "pending_verification"  # admin verifies UPI txn ref later
+    doc["created_at"] = datetime.now(timezone.utc).isoformat()
+    doc["upi_id_paid_to"] = os.environ.get("UPI_ID", "")
+
+    await db.enrollments.insert_one(doc)
+    doc.pop("_id", None)
+    logger.info(f"New enrollment: {doc['id']} for {doc['email']} — txn ref {doc['upi_txn_ref']}")
+    return doc
+
+@api_router.get("/enrollments")
+async def list_enrollments(request: Request, status: Optional[str] = None):
+    await get_current_user(request)
+    query = {}
+    if status and status != "all":
+        query["status"] = status
+    items = await db.enrollments.find(query, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    return items
+
+@api_router.get("/enrollments/stats")
+async def enrollment_stats(request: Request):
+    await get_current_user(request)
+    total = await db.enrollments.count_documents({})
+    pending = await db.enrollments.count_documents({"status": "pending_verification"})
+    verified = await db.enrollments.count_documents({"status": "verified"})
+    rejected = await db.enrollments.count_documents({"status": "rejected"})
+
+    week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+    this_week = await db.enrollments.count_documents({"created_at": {"$gte": week_ago}})
+
+    # Sum of verified amounts (revenue)
+    pipeline = [
+        {"$match": {"status": "verified"}},
+        {"$group": {"_id": None, "revenue": {"$sum": "$amount"}}},
+    ]
+    revenue_agg = await db.enrollments.aggregate(pipeline).to_list(1)
+    revenue = float(revenue_agg[0]["revenue"]) if revenue_agg else 0.0
+
+    return {
+        "total": total,
+        "pending_verification": pending,
+        "verified": verified,
+        "rejected": rejected,
+        "this_week": this_week,
+        "revenue": revenue,
+    }
+
+@api_router.get("/enrollments/{enrollment_id}")
+async def get_enrollment(enrollment_id: str, request: Request):
+    await get_current_user(request)
+    item = await db.enrollments.find_one({"id": enrollment_id}, {"_id": 0})
+    if not item:
+        raise HTTPException(status_code=404, detail="Enrollment not found")
+    return item
+
+@api_router.patch("/enrollments/{enrollment_id}")
+async def update_enrollment(enrollment_id: str, update: EnrollmentUpdate, request: Request):
+    await get_current_user(request)
+    update_dict = {k: v for k, v in update.model_dump().items() if v is not None}
+    if not update_dict:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    update_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+    result = await db.enrollments.update_one({"id": enrollment_id}, {"$set": update_dict})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Enrollment not found")
+    updated = await db.enrollments.find_one({"id": enrollment_id}, {"_id": 0})
+    return updated
+
+@api_router.delete("/enrollments/{enrollment_id}")
+async def delete_enrollment(enrollment_id: str, request: Request):
+    await get_current_user(request)
+    result = await db.enrollments.delete_one({"id": enrollment_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Enrollment not found")
+    return {"message": "Enrollment deleted successfully"}
+
 # ========== EMAIL NOTIFICATION (RESEND - ready when key provided) ==========
 
 async def send_lead_notification(lead: dict):
@@ -330,7 +437,15 @@ async def seed_admin():
         f.write("- List Leads: GET /api/leads (auth required)\n")
         f.write("- Lead Stats: GET /api/leads/stats (auth required)\n")
         f.write("- Update Lead: PATCH /api/leads/{id} (auth required)\n")
-        f.write("- Delete Lead: DELETE /api/leads/{id} (auth required)\n")
+        f.write("- Delete Lead: DELETE /api/leads/{id} (auth required)\n\n")
+        f.write("## Payment / Enrollment Endpoints\n")
+        f.write("- Payment Config: GET /api/payment/config (public) — returns UPI ID + Payee name\n")
+        f.write("- Create Enrollment: POST /api/enrollments (public) — body: name, email, phone, course, amount, upi_txn_ref, payer_upi(opt)\n")
+        f.write("- List Enrollments: GET /api/enrollments?status=pending_verification|verified|rejected|all (auth required)\n")
+        f.write("- Enrollment Stats: GET /api/enrollments/stats (auth required)\n")
+        f.write("- Get Enrollment: GET /api/enrollments/{id} (auth required)\n")
+        f.write("- Update Enrollment: PATCH /api/enrollments/{id} (auth required) — body: status(opt), notes(opt)\n")
+        f.write("- Delete Enrollment: DELETE /api/enrollments/{id} (auth required)\n")
 
 @app.on_event("startup")
 async def startup():
@@ -338,6 +453,9 @@ async def startup():
         await db.users.create_index("email", unique=True)
         await db.leads.create_index("created_at")
         await db.leads.create_index("status")
+        await db.enrollments.create_index("created_at")
+        await db.enrollments.create_index("status")
+        await db.enrollments.create_index("email")
     except Exception as e:
         logger.warning(f"Index creation skipped: {e}")
         

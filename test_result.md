@@ -101,3 +101,78 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+user_problem_statement: "Add a payment button to the appropriate place in the project and enable UPI payments (UPI ID: rajyadav12121993@okicici, Payee: Raj Yadav). After the user pays, collect their name/email/phone/UPI transaction reference, show a thank-you page, and save the enrollment record to MongoDB visible in the admin dashboard."
+
+backend:
+  - task: "UPI Payment Config Endpoint"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "New public GET /api/payment/config endpoint that returns { upi_id, payee_name, currency } sourced from backend/.env vars UPI_ID and UPI_PAYEE_NAME."
+        - working: true
+          agent: "testing"
+          comment: "✅ VERIFIED: GET /api/payment/config returns correct data - upi_id: rajyadav12121993@okicici, payee_name: Raj Yadav, currency: INR. Public endpoint accessible without authentication. All validations passed."
+
+  - task: "Enrollment CRUD Endpoints"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Added POST /api/enrollments (public), GET /api/enrollments (auth), GET /api/enrollments/stats (auth), GET /api/enrollments/{id} (auth), PATCH /api/enrollments/{id} (auth), DELETE /api/enrollments/{id} (auth). Enrollment model has name, email, phone, course, amount, upi_txn_ref, payer_upi(opt), notes(opt). Status flow: pending_verification -> verified/rejected. Stats includes revenue sum of verified. UUID ids only, no ObjectID exposure."
+        - working: true
+          agent: "testing"
+          comment: "✅ VERIFIED: All enrollment endpoints working correctly. POST /api/enrollments creates with UUID, status=pending_verification, validates email format and required fields (422 on invalid). GET /api/enrollments requires auth (401 without), supports status filters (pending_verification, verified, rejected, all). GET /api/enrollments/stats returns all required keys (total, pending_verification, verified, rejected, this_week, revenue) and correctly calculates revenue from VERIFIED enrollments only. GET /api/enrollments/{id} works with auth, returns 404 for non-existent. PATCH updates status and notes, returns 400 on empty body, 404 on non-existent, 401 without auth. DELETE works with auth, returns 404 on non-existent, 401 without auth. Regression tests: existing lead endpoints still working. 26/26 tests passed (100%)."
+
+frontend:
+  - task: "Payment Modal (UPI) on Agentic AI Course Page"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/components/PaymentModal.js, frontend/src/pages/AgenticAICoursePage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "New PaymentModal component with 3 steps: (1) UPI QR + deep link + copy UPI ID, (2) form for name/email/phone/UPI txn ref, (3) success screen. Wired to all 4 Pay Now buttons on /courses/agentic-ai (nav, hero, mid-CTA, final enroll, sticky mobile). Uses qrcode.react for QR generation of upi://pay?pa=...&pn=...&am=24999&cu=INR&tn=..."
+
+  - task: "Admin Dashboard Enrollments Tab"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/AdminDashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Added top-level tab switcher (Leads / Enrollments) in admin dashboard. Enrollments view has stats (total, pending, verified, revenue), status filters, table with row-level actions (view details, mark verified, mark rejected, delete). Detail dialog allows status + notes update."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 2
+  run_ui: false
+
+test_plan:
+  current_focus: []
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "Implemented UPI payment feature end-to-end. Backend: /api/payment/config + full /api/enrollments CRUD (public create, auth-only list/stats/patch/delete). Frontend: PaymentModal opens from all Pay Now buttons on /courses/agentic-ai, shows QR + UPI deep link, collects post-payment details, saves to Mongo. Admin dashboard has new Enrollments tab. Please test backend endpoints (auth flow, enrollment CRUD, stats calc, filter). Admin creds in /app/memory/test_credentials.md."
+    - agent: "testing"
+      message: "✅ BACKEND TESTING COMPLETE - ALL TESTS PASSED (26/26, 100%). Payment config endpoint returns correct UPI details. All enrollment CRUD operations working: create (public, validates email/required fields), list (auth required, status filters work), stats (correct revenue calculation from verified only), get by ID, update (status/notes), delete. Auth protection working on all protected endpoints. Regression tests passed (leads endpoints still working). No issues found. Backend is production-ready."

@@ -35,6 +35,15 @@ B2B-focused website for Neural Axis, an advanced tech education institute target
 - Backend CRUD for leads, JWT admin auth, admin dashboard with stats/filters/detail dialog
 - Admin credentials: admin@neuralaxis.com / NeuralAxis@2024
 
+## Payment / Enrollment (July 2025)
+- UPI Deep Link + QR payment integration on `/courses/agentic-ai` (₹24,999 Agentic AI Bootcamp)
+- All 4 "Pay Now" buttons (nav, hero, mid-CTA, final enroll, sticky mobile) open a PaymentModal
+- PaymentModal: QR code (UPI intent), copy-UPI-ID, "Pay via UPI App" mobile deep link + post-payment form (name, email, phone, UPI txn ref) + success page
+- Backend endpoints: GET /api/payment/config (public), full /api/enrollments CRUD (public create, auth list/stats/update/delete)
+- Revenue stats calculated from VERIFIED enrollments only
+- Admin dashboard: new "Enrollments" tab with stats + status filter + row-level actions (verify / reject / delete) + detail dialog
+- UPI ID / Payee configured via `UPI_ID` + `UPI_PAYEE_NAME` env vars (no hardcoding)
+
 ## Prioritized Backlog
 ### P0 (Critical - Done)
 - [x] Marketing website with all sections

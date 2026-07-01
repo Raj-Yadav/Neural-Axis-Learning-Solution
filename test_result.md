@@ -176,3 +176,9 @@ agent_communication:
       message: "Implemented UPI payment feature end-to-end. Backend: /api/payment/config + full /api/enrollments CRUD (public create, auth-only list/stats/patch/delete). Frontend: PaymentModal opens from all Pay Now buttons on /courses/agentic-ai, shows QR + UPI deep link, collects post-payment details, saves to Mongo. Admin dashboard has new Enrollments tab. Please test backend endpoints (auth flow, enrollment CRUD, stats calc, filter). Admin creds in /app/memory/test_credentials.md."
     - agent: "testing"
       message: "✅ BACKEND TESTING COMPLETE - ALL TESTS PASSED (26/26, 100%). Payment config endpoint returns correct UPI details. All enrollment CRUD operations working: create (public, validates email/required fields), list (auth required, status filters work), stats (correct revenue calculation from verified only), get by ID, update (status/notes), delete. Auth protection working on all protected endpoints. Regression tests passed (leads endpoints still working). No issues found. Backend is production-ready."
+
+# ============ Testing Round 1 Log ============
+    - agent: "testing"
+      message: "26/26 backend tests passed. GET /api/payment/config returns correct UPI creds. Full enrollment CRUD works — public POST accepts required fields + email validation (422 on invalid), auth-only GET/PATCH/DELETE correctly reject unauth requests (401), status filter works, stats endpoint correctly calculates revenue from VERIFIED enrollments only. No regressions on lead/auth endpoints."
+    - agent: "main"
+      message: "Backend confirmed working. Marking backend tasks as working:true. Frontend testing pending user approval."
